@@ -1,3 +1,6 @@
 [submodule "love"]
 	path = love
 	url = https://github.com/rollerozxa/boxsmasher-android-love
+[submodule "app/src/main/assets"]
+	path = app/src/main/assets
+	url = https://github.com/rollerozxa/boxsmasher

@@ -31,6 +31,10 @@ android {
             path 'src/main/jni/Android.mk'
         }
     }
+
+    aaptOptions {
+        ignoreAssets '!.git:.*:packaging'
+    }
 }
 
 dependencies {
