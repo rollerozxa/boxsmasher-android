@@ -1,0 +1,1 @@
+First release on F-Droid! The 1.1 release adds 5 new levels, as well as a ton of QoL improvements, statistics and a whole lot more from the past two years.
