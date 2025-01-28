@@ -1,0 +1,42 @@
+name: Build
+
+on:
+  - push
+  - pull_request
+
+jobs:
+  build:
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: true
+
+      - name: Set up OpenJDK
+        uses: actions/setup-java@v4
+        with:
+            distribution: 'temurin'
+            java-version: '17'
+
+      - name: Install build dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y cmake gcc-multilib make wget xz-utils
+
+      - name: Build external Android dependencies
+        run: |
+          pushd deps
+          ./build.sh --all armeabi-v7a
+          ./build.sh --all arm64-v8a
+        env:
+          ANDROID_NDK: /usr/local/lib/android/sdk/ndk/27.2.12479018
+
+      - name: Build app
+        run: |
+          ./gradlew assemblerelease
+
+      - name: Upload output as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: box-smasher-android
+          path: android/app/build/outputs/apk/release/app-release-unsigned.apk
