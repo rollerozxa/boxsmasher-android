@@ -2,10 +2,11 @@
 
 # Some helpers for use by the scripts
 get_tar_archive () {
-	# $1: folder to extract to, $2: URL
+	# $1: folder to extract to, $2: URL, $3: SHA256 hash
 	local filename="${2##*/}"
 	[ -d "$1" ] && return 0
 	wget -c "$2" -O "$filename"
+	echo "$3 $filename" | sha256sum -c
 	mkdir -p "$1"
 	tar -xaf "$filename" -C "$1" --strip-components=1
 	rm "$filename"
