@@ -1,0 +1,1 @@
+This update is primarily to fix the game screen being oversized on Android 15. It also contains some other bugfixes, and 7 new levels to play through!
